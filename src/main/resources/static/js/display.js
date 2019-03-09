@@ -85,15 +85,18 @@ function displayBlock(jsonBlock) {
 
 function getBlockString(block) {
     return "index=" + block.index + " creator=" + block.data + " timestamp="
-        + block.timestamp + " hash=" + JSON.stringify(block.hash) + 
-        " previous hash=" + JSON.stringify(block.previousHash) + "<br>";
+        + block.timestamp + " hash=" + JSON.stringify(block.hash)
+        + " previous hash=" + JSON.stringify(block.previousHash) 
+        + " hashrate=" + block.hashrate + "<br>";
 }
 
 function createBlockP(block) {
     var p = document.createElement("P");
     p.title = "creator " + block.data;
     p.innerHTML = "index=" + block.index + " creator=" + block.data + " timestamp="
-        + block.timestamp + " hash=" + JSON.stringify(block.hash) + " previous hash=" + JSON.stringify(block.previousHash);
+        + block.timestamp + " hash=" + JSON.stringify(block.hash)
+        + " previous hash=" + JSON.stringify(block.previousHash) 
+        + " hashrate=" + block.hashrate;
     console.log("create p.innerHTML" + p.innerHTML);
     return p;
 }

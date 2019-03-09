@@ -17,6 +17,7 @@ public class Block implements Serializable {
     private Blockhash previousHash;
     private String data;
     private int nonce;
+    private int hashrate_kHps;
 
     // for jackson
     public Block() {
@@ -65,6 +66,7 @@ public class Block implements Serializable {
         this.data = data;
         this.timestamp = timestamp;
         hash = calculateHash();
+        hashrate_kHps = 0;
     }
 
     public String getData() {
@@ -89,6 +91,10 @@ public class Block implements Serializable {
 
     public int getNonce() {
         return nonce;
+    }
+
+    public int getHashrate() {
+        return hashrate_kHps;
     }
 
     public String str() {
@@ -138,7 +144,6 @@ public class Block implements Serializable {
 //        data = (String) stream.readObject();
 //        nonce = stream.readInt();
 //    }
-
 //    public static byte[] serializeObject(Block b) throws IOException {
 //        ObjectOutputStream oos;
 //        byte[] bytes;
@@ -151,7 +156,6 @@ public class Block implements Serializable {
 //        oos.close();
 //        return bytes;
 //    }
-
 //    @Override
 //    public String toString() {
 //        StringBuilder builder = new StringBuilder();
@@ -161,7 +165,6 @@ public class Block implements Serializable {
 //        return builder.toString();
 //    }
 //
-
     public final Blockhash calculateHash() {
         MessageDigest digest = null;
         try {
@@ -181,7 +184,8 @@ public class Block implements Serializable {
             hash = calculateHash();
         }
         long endTime = System.nanoTime();
-        System.out.println("hash = " + hash + " Hash Rate = "
-                + ((float) (nonce * 1.0e6) / (endTime - startTime)) + " kH/s");  //divide by 1000000 to get milliseconds.        
+        hashrate_kHps = (int) Math.round((nonce * 1.0e6) / (endTime - startTime));
+        //System.out.println("hash = " + hash + " Hash Rate = "
+        //        + hashrate_kHps + " kH/s");  //divide by 1000000 to get milliseconds.        
     }
 }

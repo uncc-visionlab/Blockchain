@@ -111,7 +111,7 @@ public class Block implements Serializable {
             (byte) (timestamp >>> 16),
             (byte) (timestamp >>> 8),
             (byte) (timestamp & 0xff)});
-        blockBytes.put((previousHash == null) ? new byte[32] : previousHash.getHash().getBytes());
+        blockBytes.put((previousHash == null) ? new byte[32] : previousHash.getHash());
         blockBytes.put(data.getBytes());
         blockBytes.put(new byte[]{
             (byte) (nonce >>> 24),

@@ -93,18 +93,11 @@ function createBlockP(block) {
     var p = document.createElement("P");
     p.title = "creator " + block.data;
     p.innerHTML = "index=" + block.index + " creator=" + block.data + " timestamp="
-        + block.timestamp + " hash=" + toHex(block.hash) + " previous hash=" + toHex(block.previousHash);
+        + block.timestamp + " hash=" + JSON.stringify(block.hash) + " previous hash=" + JSON.stringify(block.previousHash);
     console.log("create p.innerHTML" + p.innerHTML);
     return p;
 }
-function toHex(obj) {
- return JSON.stringify(obj, (key, value) => {
-  if( typeof value === 'number'){
-    return '0x' + value.toString(16)
-  }
-  return value
-  });
-}
+
 function cleanTable(name) {
     var table = document.getElementById(name);
     table.innerHTML = "";

@@ -5,6 +5,7 @@
  */
 package agent;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Arrays;
@@ -41,27 +42,25 @@ public class Blockhash implements Serializable {
     public final void setHash(byte[] b) {//throws IOException {
         hash = new byte[32];
         if (b != null) {
-            if (b.length >= 32) {
-                hash = Arrays.copyOfRange(b, 0, 32);
-            } else {
-                hash = Arrays.copyOfRange(b, 0, b.length);
+            for (int i = 0; i < b.length && i < 32; i++) {
+                hash[i] = b[i];
             }
-        } else {
-            // randomly initialize the hash
+        } else {             // randomly initialize the hash
+            hash = new byte[32];
             for (byte ob : hash) {
                 ob = (byte) ((Math.random() * 255) - 128);
             }
         }
     }
 
-    //public byte[] getHash() {
-    //    return hash;
-    //}
-
-    public String getHash() {
-        return hash.toString();
+    @JsonSerialize(using = agent.ByteArraySerializer.class)
+    public byte[] getHash() {
+        return hash;
     }
 
+//    public String getHash() {
+//        return hash.toString();
+//    }
     @Override
     public boolean equals(Object o) {
         if (o == this) {

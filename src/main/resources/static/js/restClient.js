@@ -8,9 +8,10 @@ function getAllAgents() {
     if (testMode) {
         displayAllAgents('[{"name":"Agent1","port":1001,"blockchain":[{"index":0,"creator":"Agent1","timestamp":1502193341671,"hash":"4f99b67b06b6831886815ffe66a55be2e34dcefdfc16b6214710313062a8a480","previousHash":"ROOT_HASH"}]}' +
             ', {"name":"Agent2","port":1002,"blockchain":[{"index":1,"creator":"Agent2","timestamp":1502193341671,"hash":"4f99b67b06b6831886815ffe66a55be2e34dcefdfc16b6214710313062a8a480","previousHash":"ROOT_HASH"}]}]');
+        //displayAllAgents('[{"name":"Agent1","address":"localhost","port":1001,"blockchain":[{"index":0,"timestamp":1552163805460,"hash":{"hash":"46476cdaee7fa0e875371f38af14c5a730d977ae47ae8549fe163a0d3fbb6054"},"previousHash":{"hash":"524f4f545f484153480000000000000000000000000000000000000000000000"},"data":"ROOT","nonce":0}]}' +
+        //        ', {"name":"Agent2","address":"localhost","port":1002,"blockchain":[{"index":0,"timestamp":1552163805460,"hash":{"hash":"46476cdaee7fa0e875371f38af14c5a730d977ae47ae8549fe163a0d3fbb6054"},"previousHash":{"hash":"524f4f545f484153480000000000000000000000000000000000000000000000"},"data":"ROOT","nonce":0}]}]');
     }
 }
-
 function deleteAllAgents() {
     sendHttpRequest("DELETE", "agent/all", null, getAllAgents);
 }
@@ -39,7 +40,8 @@ function mine(name) {
     sendHttpRequest("POST", "agent/mine?agent=" + name, null, getAllAgents);
 
     if (testMode) {
-        displayBlock('{"index":1,"creator":"Agent1","timestamp":1502194172250,"hash":"2461f27f811df15a969391c70f136869a282224e8cc6fe8b628d16a499515d21","previousHash":"4f99b67b06b6831886815ffe66a55be2e34dcefdfc16b6214710313062a8a480"}');
+        displayBlock('{"index":1,"timestamp":1552163805460,"hash":{"hash":"46476cdaee7fa0e875371f38af14c5a730d977ae47ae8549fe163a0d3fbb6054"},"previousHash":{"hash":"524f4f545f484153480000000000000000000000000000000000000000000000"},"data":"Agent1","nonce":0}');
+        //displayBlock('{"index":1,"creator":"Agent1","timestamp":1502194172250,"hash":"2461f27f811df15a969391c70f136869a282224e8cc6fe8b628d16a499515d21","previousHash":"4f99b67b06b6831886815ffe66a55be2e34dcefdfc16b6214710313062a8a480"}');
     }
 }
 

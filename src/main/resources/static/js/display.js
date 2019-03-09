@@ -84,19 +84,27 @@ function displayBlock(jsonBlock) {
 }
 
 function getBlockString(block) {
-    return "index=" + block.index + " creator=" + block.creator + " timestamp="
-        + block.timestamp + " hash=" + block.hash + " previous hash=" + block.previousHash + "<br>";
+    return "index=" + block.index + " creator=" + block.data + " timestamp="
+        + block.timestamp + " hash=" + JSON.stringify(block.hash) + 
+        " previous hash=" + JSON.stringify(block.previousHash) + "<br>";
 }
 
 function createBlockP(block) {
     var p = document.createElement("P");
-    p.title = "creator " + block.creator;
-    p.innerHTML = "index=" + block.index + " creator=" + block.creator + " timestamp="
-        + block.timestamp + " hash=" + block.hash + " previous hash=" + block.previousHash;
+    p.title = "creator " + block.data;
+    p.innerHTML = "index=" + block.index + " creator=" + block.data + " timestamp="
+        + block.timestamp + " hash=" + toHex(block.hash) + " previous hash=" + toHex(block.previousHash);
     console.log("create p.innerHTML" + p.innerHTML);
     return p;
 }
-
+function toHex(obj) {
+ return JSON.stringify(obj, (key, value) => {
+  if( typeof value === 'number'){
+    return '0x' + value.toString(16)
+  }
+  return value
+  });
+}
 function cleanTable(name) {
     var table = document.getElementById(name);
     table.innerHTML = "";

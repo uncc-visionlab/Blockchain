@@ -17,7 +17,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RequestMapping(path = "/agent")
 public class AgentController {
 
-    private static AgentManager agentManager = new AgentManager();
+    private static final AgentManager agentManager = new AgentManager();
 
     @RequestMapping(method = GET)
     public Agent getAgent(@RequestParam("name") String name) {

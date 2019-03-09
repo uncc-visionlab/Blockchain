@@ -11,7 +11,8 @@ import static agent.Message.MESSAGE_TYPE.REQ_ALL_BLOCKS;
 import static agent.Message.MESSAGE_TYPE.RSP_ALL_BLOCKS;
 
 public class AgentServerThread extends Thread {
-    private Socket client;
+
+    private final Socket client;
     private final Agent agent;
 
     AgentServerThread(final Agent agent, final Socket client) {

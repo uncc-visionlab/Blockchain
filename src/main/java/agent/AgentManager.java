@@ -5,8 +5,9 @@ import java.util.List;
 
 public class AgentManager {
 
-    private List<Agent> agents = new ArrayList<>();
-    private static final Block root = new Block(0, "ROOT_HASH", "ROOT");
+    private final List<Agent> agents = new ArrayList<>();
+    private static final Block root = new Block(0, System.currentTimeMillis(), new Blockhash("ROOT_HASH".getBytes()), "ROOT");
+//    private static final Block root = new Block(0, System.currentTimeMillis(), "ROOT_HASH", "ROOT");
 
     public Agent addAgent(String name, int port) {
         Agent a = new Agent(name, "localhost", port, root, agents);

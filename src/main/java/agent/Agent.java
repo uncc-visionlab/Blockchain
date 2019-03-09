@@ -69,7 +69,8 @@ public class Agent {
         }
 
         final int index = previousBlock.getIndex() + 1;
-        final Block block = new Block(index, previousBlock.getHash(), name);
+        final Block block = new Block(index, System.currentTimeMillis(), previousBlock.getHash(), name);
+        block.mineBlock(2);
         System.out.println(String.format("%s created new block %s", name, block.toString()));
         broadcast(INFO_NEW_BLOCK, block);
         return block;
@@ -101,11 +102,11 @@ public class Agent {
 
     void stopHost() {
         listening = false;
-        try {
-            serverSocket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            serverSocket.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     private Block getLatestBlock() {
